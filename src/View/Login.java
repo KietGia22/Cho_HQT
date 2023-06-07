@@ -4,9 +4,12 @@
  */
 package View;
 
+import Connection.ConnectDB;
 import java.awt.Color;
+import java.sql.*;
 import Controller.TaiKhoanController;
 import javax.swing.JOptionPane;
+import oracle.jdbc.OracleTypes;
 
 /**
  *
@@ -17,7 +20,6 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    public String user;
     public Login() {
         initComponents();
         setSize(1040, 600);
@@ -25,6 +27,11 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
+    String user;
+    Connection conn = null;
+    CallableStatement ps = null;
+    ResultSet rs = null;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -199,7 +206,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String TenDN, MatKhau;
+        /*String TenDN, MatKhau;
         this.user = TenDN_Txt.getText();
         TenDN = TenDN_Txt.getText();
         MatKhau = MatKhau_Txt.getText();
@@ -215,6 +222,39 @@ public class Login extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Đăng nhập thất bại", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        }*/
+        try{
+            String TenDN, MatKhau;
+            TenDN = TenDN_Txt.getText();
+            MatKhau = MatKhau_Txt.getText();
+            String hostName = "localhost";
+            String serviceName = "sach"; // Tên của pluggable database
+            String userName = "main_user";
+            String password = "pass";
+            String connectionURL = "jdbc:oracle:thin:@" + hostName + ":1521/" + serviceName;
+            conn = DriverManager.getConnection(connectionURL, userName, password);
+            String sql = "call main_user.GET_DANG_NHAP(?, ?, ?)";
+            /*con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "c##bookstore", "123456");
+            String sql = "Select * FROM TAIKHOAN WHERE TENDANGNHAP=? AND MATKHAU=?";*/
+            ps = conn.prepareCall(sql);
+            ps.setString(1,TenDN_Txt.getText() );
+            ps.setString(2, MatKhau_Txt.getText());
+            ps.registerOutParameter(3, OracleTypes.CURSOR);
+            ps.execute();
+            rs = (ResultSet) ps.getObject(3);
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
+                this.dispose();
+                new Home(TenDN, MatKhau);
+                new ConnectDB(TenDN, MatKhau);
+            } else {
+                JOptionPane.showMessageDialog(null, "Đăng nhập thất bại");
+                TenDN_Txt.setText("");
+                MatKhau_Txt.setText("");
+            }
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

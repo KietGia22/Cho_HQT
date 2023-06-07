@@ -6,12 +6,14 @@ package Controller;
 
 import Connection.ConnectDB;
 import Model.TaiKhoanModel;
+import View.Home;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import oracle.jdbc.OracleTypes;
 
 /**
@@ -19,7 +21,7 @@ import oracle.jdbc.OracleTypes;
  * @author GIA KIET
  */
 public class TaiKhoanController {
-    public static int DangNhap(String TenDN, String MatKhau) {
+    /*public static int DangNhap(String TenDN, String MatKhau) {
         Connection conn = null;
         ResultSet rs = null;
         CallableStatement callsql = null;
@@ -29,7 +31,7 @@ public class TaiKhoanController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String sql = "{call GET_DANG_NHAP(?, ?, ?)}";
+            String sql = "{call main_user.GET_DANG_NHAP(?, ?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, TenDN);
             callsql.setString(2, MatKhau);
@@ -44,21 +46,24 @@ public class TaiKhoanController {
             e.printStackTrace();
         }
         return 0;
-    }
+    }*/
     
     public String getChucVu(String TenDN, String MatKhau){
         Connection conn = null;
         ResultSet rs = null;
         CallableStatement callsql = null;
         String ChucVu = "";
-        try {
-            try{
-                conn = ConnectDB.getJDBCConnection();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            String sql = "{call GET_DANG_NHAP(?, ?, ?)}";
-            callsql = conn.prepareCall(sql);
+        String hostName = "localhost";
+        String serviceName = "sach"; // Tên của pluggable database
+        String userName = "main_user";
+        String password = "pass";
+        String connectionURL = "jdbc:oracle:thin:@" + hostName + ":1521/" + serviceName;
+        try{
+            conn = DriverManager.getConnection(connectionURL, userName, password);
+            String sql = "call main_user.GET_DANG_NHAP(?, ?, ?)";
+            /*con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "c##bookstore", "123456");
+            String sql = "Select * FROM TAIKHOAN WHERE TENDANGNHAP=? AND MATKHAU=?";*/
+             callsql = conn.prepareCall(sql);
             callsql.setString(1, TenDN);
             callsql.setString(2, MatKhau);
             callsql.registerOutParameter(3, OracleTypes.CURSOR);
@@ -86,7 +91,7 @@ public class TaiKhoanController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String sql = "{call GET_DANG_NHAP(?, ?, ?)}";
+            String sql = "{call main_user.GET_DANG_NHAP(?, ?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, TenDN);
             callsql.setString(2, MatKhau);
@@ -127,7 +132,7 @@ public class TaiKhoanController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String sql = "{call GETTCTK(?)}";
+            String sql = "{call main_user.GETTCTK(?)}";
             callsql = conn.prepareCall(sql);
             callsql.registerOutParameter(1, OracleTypes.CURSOR);
             callsql.execute();
@@ -158,9 +163,9 @@ public class TaiKhoanController {
                Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(choice.equals("Mã nhân viên")){
-                sql = "{call GETTKTHEOMA(?, ?)}";
+                sql = "{call main_user.GETTKTHEOMA(?, ?)}";
             } else {
-                sql = "{call GETTKTHEOTEN(?, ?)}";
+                sql = "{call main_user.GETTKTHEOTEN(?, ?)}";
             }
             callsql = conn.prepareCall(sql);
             callsql.setString(1, search);
@@ -192,7 +197,7 @@ public class TaiKhoanController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call XoaTK(?)}";
+            sql = "{call main_user.XoaTK(?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, tk.getMaTK());
             check = callsql.executeUpdate();
@@ -215,7 +220,7 @@ public class TaiKhoanController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call SuaTK(?, ?, to_date(?, ('dd-mm-yyyy')), ?, ?, ?, ?, ?)}";
+            sql = "{call main_user.SuaTK(?, ?, to_date(?, ('dd-mm-yyyy')), ?, ?, ?, ?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, tk.getMaTK());
             callsql.setString(2, tk.getHoTen());
@@ -245,7 +250,7 @@ public class TaiKhoanController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call ThemTK(?, ? , ?, to_date(?, ('dd-mm-yyyy')), ?, ?, ?, ?, to_date(?, ('dd-mm-yyyy')), ?)}";
+            sql = "{call main_user.ThemTK(?, ? , ?, to_date(?, ('dd-mm-yyyy')), ?, ?, ?, ?, to_date(?, ('dd-mm-yyyy')), ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, tk.getTenDN());
             callsql.setString(2, tk.getMK());
@@ -277,7 +282,7 @@ public class TaiKhoanController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String sql = sql = "{call GETTKTHEOTEN(?, ?)}";
+            String sql = sql = "{call main_user.GETTKTHEOTEN(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, ten);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);

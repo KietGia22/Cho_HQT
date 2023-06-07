@@ -30,7 +30,7 @@ public class LuongController {
                 Logger.getLogger(LuongController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            sql = "{call ThemCCONG(?)}";
+            sql = "{call main_user.ThemCCONG(?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, MaTK);
             check = callsql.executeUpdate();
@@ -54,7 +54,7 @@ public class LuongController {
                 Logger.getLogger(LuongController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            sql = "{call  SUAKETTHUCCCong(?)}";
+            sql = "{call  main_user.SUAKETTHUCCCong(?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, MaTK);
             check = callsql.executeUpdate();
@@ -77,7 +77,7 @@ public class LuongController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(KhachHangController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETCHAMCONG(?)}";
+            sql = "{call main_user.GETCHAMCONG(?)}";
             callsql = conn.prepareCall(sql);
             callsql.registerOutParameter(1, OracleTypes.CURSOR);
             callsql.execute();
@@ -108,7 +108,7 @@ public class LuongController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(KhachHangController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETTCLUONG(?)}";
+            sql = "{call main_user.GETTCLUONG(?)}";
             callsql = conn.prepareCall(sql);
             callsql.registerOutParameter(1, OracleTypes.CURSOR);
             callsql.execute();

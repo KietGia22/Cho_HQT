@@ -29,7 +29,7 @@ public class TheLoaiController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TheLoaiController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETTCTL(?)}";
+            sql = "{call main_user.GETTCTL(?)}";
             callsql = conn.prepareCall(sql);
             callsql.registerOutParameter(1, OracleTypes.CURSOR);
             callsql.execute();
@@ -59,9 +59,9 @@ public class TheLoaiController {
                 Logger.getLogger(TheLoaiController.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(choice.equals("Mã thể loại"))
-                sql = "{call GETTLTHEOMA(?, ?)}";
+                sql = "{call main_user.GETTLTHEOMA(?, ?)}";
             else 
-                sql = "{call GETTLTHEOTEN(?, ?)}";
+                sql = "{call main_user.GETTLTHEOTEN(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, search);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);
@@ -90,7 +90,7 @@ public class TheLoaiController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TheLoaiController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call ThemTL(?)}";
+            sql = "{call main_user.ThemTL(?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, tl.getTenTL());
             check = callsql.executeUpdate();
@@ -113,7 +113,7 @@ public class TheLoaiController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TheLoaiController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call SuaTL(?, ?)}";
+            sql = "{call main_user.SuaTL(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, tl.getMaTL());
             callsql.setString(2, tl.getTenTL());
@@ -137,7 +137,7 @@ public class TheLoaiController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TheLoaiController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call XoaTL(?)}";
+            sql = "{call main_user.XoaTL(?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, tl.getMaTL());
             check = callsql.executeUpdate();

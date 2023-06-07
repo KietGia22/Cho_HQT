@@ -32,7 +32,7 @@ public class KhachHangController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(KhachHangController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call  GETTCKH(?)}";
+            sql = "{call  main_user.GETTCKH(?)}";
             callsql = conn.prepareCall(sql);
             callsql.registerOutParameter(1, OracleTypes.CURSOR);
             callsql.execute();
@@ -63,9 +63,9 @@ public class KhachHangController {
                Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(choice.equals("Mã khách hàng")){
-                sql = "{call GETKHTHEOMA(?, ?)}";
+                sql = "{call main_user.GETKHTHEOMA(?, ?)}";
             } else {
-                sql = "{call GETKHTHEOTEN(?, ?)}";
+                sql = "{call main_user.GETKHTHEOTEN(?, ?)}";
             }
             callsql = conn.prepareCall(sql);
             callsql.setString(1, search);
@@ -96,7 +96,7 @@ public class KhachHangController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call ThemKH(?, to_date(?, ('dd-mm-yyyy')), ?, ?, ?, ?)}";
+            sql = "{call main_user.ThemKH(?, to_date(?, ('dd-mm-yyyy')), ?, ?, ?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, kh.getHoTen());
             callsql.setString(2, kh.toString(kh.getNgSinh()));
@@ -124,7 +124,7 @@ public class KhachHangController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call SuaKH(?, ?, to_date(?, ('dd-mm-yyyy')), ?, ?, ?, ?)}";
+            sql = "{call main_user.SuaKH(?, ?, to_date(?, ('dd-mm-yyyy')), ?, ?, ?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, kh.getMaKH());
             callsql.setString(2, kh.getHoTen());
@@ -153,7 +153,7 @@ public class KhachHangController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call XoaKH(?)}";
+            sql = "{call main_user.XoaKH(?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, kh.getMaKH());
             check = callsql.executeUpdate();

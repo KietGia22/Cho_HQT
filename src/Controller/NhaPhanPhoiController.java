@@ -29,7 +29,7 @@ public class NhaPhanPhoiController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(NhaPhanPhoiController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETTCNPP(?)}";
+            sql = "{call main_user.GETTCNPP(?)}";
             callsql = conn.prepareCall(sql);
             callsql.registerOutParameter(1, OracleTypes.CURSOR);
             callsql.execute();
@@ -60,9 +60,9 @@ public class NhaPhanPhoiController {
                 Logger.getLogger(NhaPhanPhoiController.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(choice.equals("Mã nhà phân phối"))
-                sql = "{call GETNPPTHEOMA(?, ?)}";
+                sql = "{call main_user.GETNPPTHEOMA(?, ?)}";
             else 
-                sql = "{call GETNPPTHEOTEN(?, ?)}";
+                sql = "{call main_user.GETNPPTHEOTEN(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, search);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);
@@ -92,7 +92,7 @@ public class NhaPhanPhoiController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(NhaPhanPhoiController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call ThemNPP(?, ?, ?)}";
+            sql = "{call main_user.ThemNPP(?, ?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, npp.getTenNPP());
             callsql.setString(2, npp.getDiaChi());
@@ -118,7 +118,7 @@ public class NhaPhanPhoiController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(NhaPhanPhoiController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call SuaNPP_FIX(?, ?, ?, ?)}";
+            sql = "{call main_user.SuaNPP_FIX(?, ?, ?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, npp.getMaNPP());
             callsql.setString(2, npp.getTenNPP());
@@ -144,7 +144,7 @@ public class NhaPhanPhoiController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(NhaPhanPhoiController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call XoaNPP(?)}";
+            sql = "{call main_user.XoaNPP(?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, npp.getMaNPP());
             check = callsql.executeUpdate();
@@ -167,7 +167,7 @@ public class NhaPhanPhoiController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String sql = sql = "{call GETNPPTHEOTEN(?, ?)}";
+            String sql = sql = "{call main_user.GETNPPTHEOTEN(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, ten);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);
@@ -195,7 +195,7 @@ public class NhaPhanPhoiController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TaiKhoanController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String sql = sql = "{call GETNPPTHEOMA(?, ?)}";
+            String sql = sql = "{call main_user.GETNPPTHEOMA(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, ma);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);

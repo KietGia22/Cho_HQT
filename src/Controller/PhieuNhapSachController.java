@@ -38,7 +38,7 @@ public class PhieuNhapSachController {
                 Logger.getLogger(PhieuNhapSachController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            sql = "{call GETTCPNS(?)}";
+            sql = "{call main_user.GETTCPNS(?)}";
             callsql = conn.prepareCall(sql);
             callsql.registerOutParameter(1, OracleTypes.CURSOR);
             callsql.execute();
@@ -77,7 +77,7 @@ public class PhieuNhapSachController {
             }
             
             if(choice.equals("Mã phiếu nhập sách")){
-                sql = "{call GETPNSTHEOMA(?,?)}";
+                sql = "{call main_user.GETPNSTHEOMA(?,?)}";
                 callsql = conn.prepareCall(sql);
                 callsql.setString(1, search);
                 callsql.registerOutParameter(2, OracleTypes.CURSOR);
@@ -85,14 +85,14 @@ public class PhieuNhapSachController {
                 
             else if(choice.equals("Tên nhân viên")){
                 int MaTk = tk.GetMaTKTheoTen(search);
-                sql = "{call GETPNSTHEONV(?,?)}";
+                sql = "{call main_user.GETPNSTHEONV(?,?)}";
                 callsql = conn.prepareCall(sql);
                 callsql.setInt(1, MaTk);
                 callsql.registerOutParameter(2, OracleTypes.CURSOR);
             }
             else if(choice.equals("Tên nhà phân phối")){
                 int MaPnn = npp.GetNPPTheoTen(search);
-                sql = "{call GETPNSTHEONPP(?, ?)}";
+                sql = "{call main_user.GETPNSTHEONPP(?, ?)}";
                 callsql = conn.prepareCall(sql);
                 callsql.setInt(1, MaPnn);
                 callsql.registerOutParameter(2, OracleTypes.CURSOR);
@@ -129,7 +129,7 @@ public class PhieuNhapSachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETSACHTHEOPNS(?, ?)}";
+            sql = "{call main_user.GETSACHTHEOPNS(?, ?)}";
                 
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, MaPNS);
@@ -168,7 +168,7 @@ public class PhieuNhapSachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call ThemPNS(?, ?)}";
+            sql = "{call main_user.ThemPNS(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, pns.getMaNPP());
             callsql.setInt(2, pns.getMaTK());
@@ -193,7 +193,7 @@ public class PhieuNhapSachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETMaPNS(?)}";
+            sql = "{call main_user.GETMaPNS(?)}";
             callsql = conn.prepareCall(sql);
             callsql.registerOutParameter(1, OracleTypes.CURSOR);
             callsql.execute();
@@ -218,7 +218,7 @@ public class PhieuNhapSachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call ThemCTPNSACH(?, ?, ?, ?)}";
+            sql = "{call main_user.ThemCTPNSACH(?, ?, ?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, pns.getMaPNS());
             callsql.setInt(2, pns.getMaSach());

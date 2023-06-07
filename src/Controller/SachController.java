@@ -32,7 +32,7 @@ public class SachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(SachController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GET_TL_CHO_SACH(?)}";
+            sql = "{call main_user.GET_TL_CHO_SACH(?)}";
             callsql = conn.prepareCall(sql);
             callsql.registerOutParameter(1, OracleTypes.CURSOR);
             callsql.execute();
@@ -69,9 +69,9 @@ public class SachController {
                 Logger.getLogger(SachController.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(choice.equals("Mã sách"))
-                sql = "{call GETSACHTHEOMA(?, ?)}";
+                sql = "{call main_user.GETSACHTHEOMA(?, ?)}";
             else 
-                sql = "{call GETSACHTHEOTEN(?, ?)}";
+                sql = "{call main_user.GETSACHTHEOTEN(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, search);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);
@@ -108,7 +108,7 @@ public class SachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(SachController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETSACHTHEOMA(?, ?)}";
+            sql = "{call main_user.GETSACHTHEOMA(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, MaSach);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);
@@ -136,7 +136,7 @@ public class SachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(SachController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETTLTHEOTEN(?, ?)}";
+            sql = "{call main_user.GETTLTHEOTEN(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, TenTheLoai);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);
@@ -162,7 +162,7 @@ public class SachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TheLoaiController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call ThemSACH(?, ?, ?, ?, ?, ?, ?)}";
+            sql = "{call main_user.ThemSACH(?, ?, ?, ?, ?, ?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, sm.getTenSach());
             callsql.setString(2, sm.getTenTG());
@@ -191,7 +191,7 @@ public class SachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TheLoaiController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call SuaSACH(?, ?, ?, ?, ?, ?, ?, ?)}";
+            sql = "{call main_user.SuaSACH(?, ?, ?, ?, ?, ?, ?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, sm.getMaSach());
             callsql.setString(2, sm.getTenSach());
@@ -221,7 +221,7 @@ public class SachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(TheLoaiController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call XoaSACH(?)}";
+            sql = "{call main_user.XoaSACH(?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, sm.getMaSach());
             check = callsql.executeUpdate();
@@ -245,7 +245,7 @@ public class SachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(SachController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETSACHTHEOTEN(?, ?)}";
+            sql = "{call main_user.GETSACHTHEOTEN(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, ten);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);
@@ -272,7 +272,7 @@ public class SachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(SachController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETSACHTHEOTEN(?, ?)}";
+            sql = "{call main_user.GETSACHTHEOTEN(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, ten);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);
@@ -299,7 +299,7 @@ public class SachController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(SachController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETSACHTHEOTEN(?, ?)}";
+            sql = "{call main_user.GETSACHTHEOTEN(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setString(1, ten);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);

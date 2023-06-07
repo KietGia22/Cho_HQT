@@ -16,12 +16,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author GIA KIET
  */
-public class PhieuNhap extends javax.swing.JFrame {
+public class PhieuNhapSach extends javax.swing.JFrame {
 
     /**
      * Creates new form PhieuNhap
      */
-    public PhieuNhap() {
+    public PhieuNhapSach() {
         initComponents();
          this.setLocationRelativeTo(null);
         GetTCPhieuNhapSach();
@@ -35,7 +35,7 @@ public class PhieuNhap extends javax.swing.JFrame {
     public int ID;
     public String TenNV, TenNPP, NgayTaoPNS, TongGiaTienNhap;
     
-    public PhieuNhap(String TenDN, String MatKhau){
+    public PhieuNhapSach(String TenDN, String MatKhau){
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -338,20 +338,21 @@ public class PhieuNhap extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PhieuNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PhieuNhapSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PhieuNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PhieuNhapSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PhieuNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PhieuNhapSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PhieuNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PhieuNhapSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PhieuNhap().setVisible(true);
+                new PhieuNhapSach().setVisible(true);
             }
         });
     }

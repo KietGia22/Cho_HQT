@@ -34,7 +34,7 @@ public class HoaDonController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETTCHD(?)}";
+            sql = "{call main_user.GETTCHD(?)}";
             callsql = conn.prepareCall(sql);
             callsql.registerOutParameter(1, OracleTypes.CURSOR);
             callsql.execute();
@@ -67,7 +67,7 @@ public class HoaDonController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call  GETKHTHEOMA(?, ?)}";
+            sql = "{call  main_user.GETKHTHEOMA(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, MaKH);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);
@@ -95,7 +95,7 @@ public class HoaDonController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call  GETTKTHEOMA(?, ?)}";
+            sql = "{call  main_user.GETTKTHEOMA(?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, MaNV);
             callsql.registerOutParameter(2, OracleTypes.CURSOR);
@@ -124,7 +124,7 @@ public class HoaDonController {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(choice.equals("Mã hoá đơn"))
-                sql = "{call GETHDTHEOMA(?, ?)}";
+                sql = "{call main_user.GETHDTHEOMA(?, ?)}";
                 
             callsql = conn.prepareCall(sql);
             callsql.setString(1, search);
@@ -159,7 +159,7 @@ public class HoaDonController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETSACHTHEOHD(?, ?)}";
+            sql = "{call main_user.GETSACHTHEOHD(?, ?)}";
                 
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, MaHD);
@@ -199,7 +199,7 @@ public class HoaDonController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call GETMaHD(?)}";
+            sql = "{call main_user.GETMaHD(?)}";
             callsql = conn.prepareCall(sql);
             callsql.registerOutParameter(1, OracleTypes.CURSOR);
             callsql.execute();
@@ -224,7 +224,7 @@ public class HoaDonController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call ThemHD(?, ?)}";
+            sql = "{call main_user.ThemHD(?, ?)}";
             callsql = conn.prepareCall(sql);
             if(hd.getMaKH() != 0)
                 callsql.setInt(1,(Integer) hd.getMaKH());
@@ -251,7 +251,7 @@ public class HoaDonController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call ThemCTHD(?, ?, ?)}";
+            sql = "{call main_user.ThemCTHD(?, ?, ?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, hd.getMaHD());
             callsql.setInt(2, hd.getMaSach());
@@ -276,7 +276,7 @@ public class HoaDonController {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(HoaDonController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sql = "{call XoaHD(?)}";
+            sql = "{call main_user.XoaHD(?)}";
             callsql = conn.prepareCall(sql);
             callsql.setInt(1, hd.getMaHD());
             check = callsql.executeUpdate();

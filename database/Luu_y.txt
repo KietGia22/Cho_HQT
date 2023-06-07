@@ -1,0 +1,1 @@
+Do oracle của nhóm chúng em không thể hiển thị rõ Tiếng Việt nên mong cô hãy bỏ chút thời gian copy dữ liệu từ data2.docx vào data.sql để có dữ liệu là Tiếng Việt. Nhóm chúng em xin cảm ơn
