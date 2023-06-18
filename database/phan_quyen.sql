@@ -196,3 +196,9 @@ GRANT EXECUTE ON GETTLTHEOTEN TO nv;
 GRANT EXECUTE ON GET_TL_CHO_SACH TO nv;
 
 GRANT EXECUTE ON GET_TL_CHO_SACH TO nvk;
+
+alter session set container = sach;
+
+grant execute on DBMS_LOCK TO main_user;
+
+commit;
